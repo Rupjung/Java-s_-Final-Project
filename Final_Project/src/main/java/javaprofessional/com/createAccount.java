@@ -54,6 +54,9 @@ public class createAccount {
 
         System.out.print("Enter your name: ");
         this.userName= input.nextLine();
+        ArrayList<String> forProductList = new ArrayList<>();
+        Buy.getSoldproduct().put(this.userName, forProductList);
+        Buy.getBoughtproduct().put(this.userName, forProductList);
     }
 
     public Long getPhoneNumber() {
