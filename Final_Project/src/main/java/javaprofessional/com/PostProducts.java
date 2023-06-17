@@ -7,7 +7,6 @@ public  class PostProducts {
     private String product;
     private Categories category;
     private static ArrayList<String> productList = new ArrayList<>();
-    protected static HashMap<Categories, ArrayList> productListByCategories = new HashMap<>();
     private String seller;
     private Float price;
     private String description;
@@ -29,9 +28,6 @@ public  class PostProducts {
             System.out.print("Enter a description for the product: ");
             this.description = input.nextLine();
             productDescription.put(product, description);
-            productListByCategories.put(category.ELECTRONICS, new ArrayList<>());
-            productListByCategories.put(category.CLOTHING, new ArrayList<>());
-            productListByCategories.put(category.BOOKS, new ArrayList<>());
             setProductListByCategories();
             System.out.println("Product posted successfully......");
         }
@@ -47,8 +43,16 @@ public  class PostProducts {
     }
 
     public void setProductListByCategories() {
-        productListByCategories.get(this.category).add(this.product);
-        sellingid.put(this.seller, this.productListByCategories);
+        if (this.category == Categories.BOOKS) {
+            sellingid.get(this.seller).get(Categories.BOOKS).add(this.product);
+        }
+        else if (this.category == Categories.CLOTHING) {
+            sellingid.get(this.seller).get(Categories.CLOTHING).add(this.product);
+        }
+        else if (this.category == Categories.ELECTRONICS) {
+            sellingid.get(this.seller).get(Categories.ELECTRONICS).add(this.product);
+        }
         setProductList();
+
     }
 }
