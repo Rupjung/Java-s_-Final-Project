@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 
 public class Buy extends PostProducts {
     private Login buyer;
+    private Categories category;
     private Login seller;
     protected String product;
-    private static HashMap<String, ArrayList> soldproduct = new HashMap<>();
-    private static HashMap<String, ArrayList> boughtproduct = new HashMap<>();
-    private Float price;
+    public static HashMap<String, ArrayList<String>> soldproduct = new HashMap<>();
+    public static HashMap<String, ArrayList<String>> boughtproduct = new HashMap<>();
 
     Buy(Login seller, Categories category, String product) {
         super(seller, category);
         this.seller = seller;
+        this.category = category;
     }
 
     @Override
@@ -30,51 +31,52 @@ public class Buy extends PostProducts {
         Boolean flag = true;
         for (HashMap.Entry<String, HashMap<Categories, ArrayList>> entry : super.sellingid.entrySet()) {
             String key = entry.getKey();
+            HashMap<Categories, ArrayList> value = entry.getValue();
             if (key.equalsIgnoreCase(this.seller.getName())) {
-                HashMap<Categories, ArrayList> value = entry.getValue();
                 for (HashMap.Entry<Categories, ArrayList> entry1 : value.entrySet()) {
-
                     Categories key1 = entry1.getKey();
-                    ArrayList value1 = entry1.getValue();
-                    String itemToRemove = this.product;
-                    Iterator<String> iterator = value1.iterator();
-                    if (iterator.hasNext()) {
-                        while (iterator.hasNext()) {
-                            String item = iterator.next();
-                            if (item.equals(itemToRemove)) {
-                                iterator.remove();
-                                flag = false;
-                                break;
+                    if (key1.equals(this.category)) {
+                        ArrayList value1 = entry1.getValue();
+                        String itemToRemove = this.product;
+                        Iterator<String> iterator = value1.iterator();
+                        if (iterator.hasNext()) {
+                            while (iterator.hasNext()) {
+                                String item = iterator.next();
+                                if (item.equals(itemToRemove)) {
+                                    iterator.remove();
+                                    flag = false;
+                                    break;
+                                }
                             }
+
                         }
+                        if (flag) {
+                            System.out.println("Couldn't find the item");
+                            return;
+                        } else {
+                            value.put(key1, value1);
+                            super.sellingid.put(key, value);
+                            soldproduct.get(this.seller.getName()).add(this.product);
+                            System.out.println( soldproduct.get(this.seller.getName())+" at "+this.seller.getName());
+                            boughtproduct.get(this.buyer.getName()).add(this.product);
+                            System.out.println(boughtproduct.get(this.buyer.getName())+" at "+ this.buyer.getName());
+                            System.out.println(boughtproduct.get(this.buyer.getName())+" at "+ this.seller.getName());
+                            System.out.println("You have bought " + this.product + " from " + this.seller.getName() + ".");
+                        }break;
                     }
-                    if (!flag) {
-                        value.put(key1, value1);
-                        break;
-                    }
-                }
-                if (!flag) {
-                    super.sellingid.put(key, value);
-                    break;
-                }
-                if (flag) {
-                    System.out.println("Couldn't find the item.");
-                    return;
-                }
-                soldproduct.get(this.seller.getName()).add(this.product);
-                boughtproduct.get(this.buyer.getName()).add(this.product);
-                System.out.println("You have bought " + this.product + " from " + this.seller.getName() + ".");
+                }break;
             }
 
         }
     }
 
 
-   public static HashMap<String, ArrayList> getSoldproduct() {
+
+   public  static HashMap<String, ArrayList<String>> getSoldproduct() {
         return soldproduct;
     }
 
-    public static HashMap<String, ArrayList> getBoughtproduct() {
+    public  static HashMap<String, ArrayList<String>> getBoughtproduct() {
         return boughtproduct;
     }
 
