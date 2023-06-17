@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Displayitem {
     private Login User;
-    static Integer i=1;
+     Integer i=1;
 
     Displayitem(Login  user){
         this.User= user;
