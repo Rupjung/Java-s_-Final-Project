@@ -5,18 +5,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 public class UserProfile {
-    Login user;
+    String user;
     private Float sum=0.0f;
     private Float total=0.0f;
 
     UserProfile(Login user) {
-        this.user = user;
+        this.user = user.getName();
     }
 
     public void displayHistory() {
         System.out.println("Your buying history:-");
-        ArrayList boughtProduct=Buy.boughtproduct.get(user.getName());
-        Iterator<String> iterator = boughtProduct.iterator();
+        Iterator<String> iterator = Buy.getBoughtList(this.user).iterator();
         int i=1;
         if (iterator.hasNext())  {
             while (iterator.hasNext()) {
@@ -29,10 +28,9 @@ public class UserProfile {
         }
         else { System.out.println("Oops!!! You haven't bought anything yet.");}
        System.out.println("Your selling history:-");
-        ArrayList soldProduct = Buy.soldproduct.get(user.getName());
-        Iterator<String> iterator1 = soldProduct.iterator();
+         Iterator<String>  iterator1 = Buy.getSoldList(this.user).iterator();
         int j = 1;
-        if (iterator.hasNext())  {
+        if (iterator1.hasNext())  {
             while (iterator1.hasNext()) {
                 String item1 = iterator1.next();
                 System.out.println(j + "." + item1);
@@ -44,8 +42,7 @@ public class UserProfile {
 
     public void displayIncomeExpense(){
         System.out.println("Your spending:-");
-        ArrayList boughtProduct=Buy.getBoughtproduct().get(user.getName());
-        Iterator<String> iterator = boughtProduct.iterator();
+        Iterator<String> iterator = Buy.getBoughtList(this.user).iterator();
         int i=1;
         if (iterator.hasNext())  {
             while (iterator.hasNext()) {
@@ -58,10 +55,9 @@ public class UserProfile {
         }
         else { System.out.println("Oops!!! You haven't bought anything yet.");}
         System.out.println("Your income:-");
-        ArrayList soldProduct = Buy.getSoldproduct().get(user.getName());
-        Iterator<String> iterator1 = soldProduct.iterator();
+        Iterator<String> iterator1 = Buy.getSoldList(this.user).iterator();
         int j = 1;
-        if (iterator.hasNext())  {
+        if (iterator1.hasNext())  {
             while (iterator1.hasNext()) {
                 String item1 = iterator1.next();
                 System.out.println(i +". Rs."+PostProducts.productPrice.get(item1)+" for "+item1);
