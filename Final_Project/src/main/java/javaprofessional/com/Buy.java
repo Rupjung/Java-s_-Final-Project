@@ -16,8 +16,8 @@ public class Buy extends PostProducts {
 
     Buy(Login seller, Categories category, String product) {
         super(seller, category);
-        this.seller = seller;
-        this.category = category;
+        this.seller=seller;
+        this.category=category;
     }
 
     @Override
@@ -57,10 +57,7 @@ public class Buy extends PostProducts {
                             value.put(key1, value1);
                             super.sellingid.put(key, value);
                             soldproduct.get(this.seller.getName()).add(this.product);
-                            System.out.println( soldproduct.get(this.seller.getName())+" at "+this.seller.getName());
-                            boughtproduct.get(this.buyer.getName()).add(this.product);
-                            System.out.println(boughtproduct.get(this.buyer.getName())+" at "+ this.buyer.getName());
-                            System.out.println(boughtproduct.get(this.buyer.getName())+" at "+ this.seller.getName());
+                            boughtproduct.get(this.buyer.getName()).add(this.product);;
                             System.out.println("You have bought " + this.product + " from " + this.seller.getName() + ".");
                         }break;
                     }
@@ -72,12 +69,15 @@ public class Buy extends PostProducts {
 
 
 
-   public  static HashMap<String, ArrayList<String>> getSoldproduct() {
-        return soldproduct;
+  public static ArrayList <String> getSoldList(String seller){
+        ArrayList <String> soldlist= new ArrayList<>();
+        soldlist=soldproduct.get(seller);
+        return soldlist;
     }
-
-    public  static HashMap<String, ArrayList<String>> getBoughtproduct() {
-        return boughtproduct;
+    public static ArrayList <String> getBoughtList(String seller){
+        ArrayList <String> boughtlist= new ArrayList<>();
+        boughtlist=boughtproduct.get(seller);
+        return boughtlist;
     }
 
 }
