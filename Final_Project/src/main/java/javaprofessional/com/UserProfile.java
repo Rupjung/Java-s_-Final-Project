@@ -13,9 +13,9 @@ public class UserProfile {
         this.user = user;
     }
 
- /*  public void displayHistory() {
+    public void displayHistory() {
         System.out.println("Your buying history:-");
-        ArrayList boughtProduct=Buy.getBoughtproduct().get(user.getName());
+        ArrayList boughtProduct=Buy.boughtproduct.get(user.getName());
         Iterator<String> iterator = boughtProduct.iterator();
         int i=1;
         if (iterator.hasNext())  {
@@ -24,10 +24,12 @@ public class UserProfile {
                 System.out.println(i + "." + item);
                 i++;
             }
+
+
         }
         else { System.out.println("Oops!!! You haven't bought anything yet.");}
        System.out.println("Your selling history:-");
-        ArrayList soldProduct = Buy.getSoldproduct().get(user.getName());
+        ArrayList soldProduct = Buy.soldproduct.get(user.getName());
         Iterator<String> iterator1 = soldProduct.iterator();
         int j = 1;
         if (iterator.hasNext())  {
@@ -41,14 +43,14 @@ public class UserProfile {
     }
 
     public void displayIncomeExpense(){
-        System.out.println("Your expenses:-");
+        System.out.println("Your spending:-");
         ArrayList boughtProduct=Buy.getBoughtproduct().get(user.getName());
         Iterator<String> iterator = boughtProduct.iterator();
         int i=1;
         if (iterator.hasNext())  {
             while (iterator.hasNext()) {
                 String item = iterator.next();
-                System.out.println(i +". Rs."+PostProducts.productPrice.get(item)+" for"+item);
+                System.out.println(i +". Rs."+PostProducts.productPrice.get(item)+" for "+item);
                 sum=sum+ PostProducts.productPrice.get(item);
                 i++;
             }
@@ -62,14 +64,14 @@ public class UserProfile {
         if (iterator.hasNext())  {
             while (iterator1.hasNext()) {
                 String item1 = iterator1.next();
-                System.out.println(i +". Rs."+PostProducts.productPrice.get(item1)+" for"+item1);
+                System.out.println(i +". Rs."+PostProducts.productPrice.get(item1)+" for "+item1);
                 total=total + PostProducts.productPrice.get(item1);
                 j++;
             }
             System.out.println("Total =Rs."+total);
         }
         else{ System.out.println("Either you haven't posted any product or, your product hasn't been sold");}
-    }*/
+    }
 
     }
 
