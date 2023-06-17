@@ -5,7 +5,7 @@ import java.util.*;
 public  class Main {
     public static void main(String[] args) {
 
-        System.out.println("Welcome to ** marketplace!!!!");
+        System.out.println("Welcome to Texas marketplace!!!!");
         while (true) {
             Boolean flag = false;
             Scanner input = new Scanner(System.in);
@@ -31,7 +31,7 @@ public  class Main {
                         System.out.println("----3.Buy item");
                         System.out.println("----4.Display history");
                         System.out.println("----5.Display income/expenditure ");
-                        System.out.println("----6.Exit");
+                        System.out.println("----6.Logout");
                         String choice1 = input.nextLine();
 
                         int rojai1 = Integer.parseInt(choice1);
@@ -110,16 +110,12 @@ public  class Main {
 
                             case 4:
                                 UserProfile display_history = new UserProfile(user);
-                               // Buy.getSoldproduct().put(user.getName(), new ArrayList<>());
-                                //Buy.getBoughtproduct().put(user.getName(), new ArrayList<>());
-                                //display_history.displayHistory();
+                                display_history.displayHistory();
                                 break;
 
                             case 5:
                                 UserProfile displayIncomeExpense = new UserProfile(user);
-                                //Buy.getSoldproduct().put(user.getName(), new ArrayList<>());
-                                //Buy.getBoughtproduct().put(user.getName(), new ArrayList<>());
-                               // displayIncomeExpense.displayIncomeExpense();
+                                displayIncomeExpense.displayIncomeExpense();
                                 break;
 
 
