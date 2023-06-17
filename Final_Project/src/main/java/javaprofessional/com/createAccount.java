@@ -54,9 +54,15 @@ public class createAccount {
 
         System.out.print("Enter your name: ");
         this.userName= input.nextLine();
-        ArrayList<String> forProductList = new ArrayList<>();
-        Buy.getSoldproduct().put(this.userName, forProductList);
-        Buy.getBoughtproduct().put(this.userName, forProductList);
+        Buy.boughtproduct.put(this.userName, new ArrayList<String>());
+        Buy.soldproduct.put(this.userName, new ArrayList<String>());
+
+        HashMap<Categories, ArrayList> tempo = new HashMap<>();
+        tempo.put(Categories.ELECTRONICS, new ArrayList<>());
+        tempo.put(Categories.BOOKS, new ArrayList<>());
+        tempo.put(Categories.CLOTHING, new ArrayList<>());
+        PostProducts.sellingid.put(this.userName, tempo);
+
     }
 
     public Long getPhoneNumber() {
